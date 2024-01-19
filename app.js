@@ -1,55 +1,58 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const board = document.getElementById('board');
-    let currentPlayer = 'X';
-    const gameBoard = ['', '', '', '', '', '', '', '', ''];
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener elementos del DOM
+    const board = document.getElementById("board");
+    const playerXInput = document.getElementById("playerX");
+    const playerOInput = document.getElementById("playerO");
+    const playerXScoreElement = document.getElementById("playerXScore");
+    const playerOScoreElement = document.getElementById("playerOScore");
 
-    function renderBoard() {
-        board.innerHTML = '';
-        gameBoard.forEach((value, index) => {
-            const square = document.createElement('div');
-            square.classList.add('square');
-            square.textContent = value;
-            square.addEventListener('click', () => makeMove(index));
-            board.appendChild(square);
-        });
-    }
+    let currentPlayer = "X";
+    let playerXScore = 0;
+    let playerOScore = 0;
 
-    function makeMove(index) {
-        if (gameBoard[index] === '') {
-            gameBoard[index] = currentPlayer;
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            checkWinner();
-            renderBoard();
+    // Función para manejar el clic en las celdas
+    function handleCellClick(event) {
+        const cell = event.target;
+        const cellId = cell.id;
+        
+        if (!cell.classList.contains("occupied-x") && !cell.classList.contains("occupied-o")) {
+            cell.textContent = currentPlayer;
+            cell.classList.add(`occupied-${currentPlayer}`);
+
+            // Verificar si hay un ganador (lógica del juego aquí)
+
+            // Cambiar al siguiente jugador
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
     }
 
-    function checkWinner() {
-        const winPatterns = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-            [0, 4, 8], [2, 4, 6]             // Diagonals
-        ];
+    // Agregar oyente de eventos a las celdas del tablero
+    board.addEventListener("click", handleCellClick);
 
-        for (const pattern of winPatterns) {
-            const [a, b, c] = pattern;
-            if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                alert(`${gameBoard[a]} wins!`);
-                resetGame();
-                return;
-            }
+    // Ejemplo: Actualizar el marcador cuando hay un ganador
+    function updateScore(winner) {
+        if (winner === "X") {
+            playerXScore++;
+        } else if (winner === "O") {
+            playerOScore++;
         }
 
-        if (!gameBoard.includes('')) {
-            alert('It\'s a draw!');
-            resetGame();
-        }
+        playerXScoreElement.textContent = `Victorias de Jugador X: ${playerXScore}`;
+        playerOScoreElement.textContent = `Victorias de Jugador O: ${playerOScore}`;
     }
 
-    function resetGame() {
-        gameBoard.fill('');
-        currentPlayer = 'X';
-        renderBoard();
+    // Lógica del juego (ejemplo simple)
+    // Debes implementar la lógica completa para determinar el ganador
+
+    // Ejemplo: Función para verificar si hay un ganador
+    function checkForWinner() {
+        // Implementa la lógica para verificar si hay un ganador
+        // y llama a updateScore con el jugador ganador si es necesario
+        // ...
+
+        // Ejemplo: Actualizar el marcador (simulado)
+        updateScore(currentPlayer);
     }
 
-    renderBoard();
+    // Puedes agregar más funciones y lógica del juego según sea necesario
 });
