@@ -12,23 +12,52 @@
 
         #board {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 5px;
             margin: 20px auto;
+            max-width: 300px;
         }
 
         .square {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             border: 1px solid #000;
             font-size: 36px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square.occupied-x {
+            background-color: #aaffaa; /* Color para el jugador X */
+        }
+
+        .square.occupied-o {
+            background-color: #aaddff; /* Color para el jugador O */
         }
     </style>
 </head>
 <body>
     <h1>Tic-Tac-Toe</h1>
-    <div id="board"></div>
+    <div>
+        <label for="playerX">Nombre del Jugador X:</label>
+        <input type="text" id="playerX" placeholder="Jugador X">
+        <br>
+        <label for="playerO">Nombre del Jugador O:</label>
+        <input type="text" id="playerO" placeholder="Jugador O">
+    </div>
+    <div id="board">
+        <div class="square" id="cell-0"></div>
+        <div class="square" id="cell-1"></div>
+        <div class="square" id="cell-2"></div>
+        <div class="square" id="cell-3"></div>
+        <div class="square" id="cell-4"></div>
+        <div class="square" id="cell-5"></div>
+        <div class="square" id="cell-6"></div>
+        <div class="square" id="cell-7"></div>
+        <div class="square" id="cell-8"></div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
