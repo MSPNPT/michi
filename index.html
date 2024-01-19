@@ -32,6 +32,11 @@
         .square.occupied-x, .square.occupied-o {
             background-color: #aaffaa; /* Color para el jugador X y O */
         }
+
+        #score {
+            margin-top: 20px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +58,10 @@
         <div class="square" id="cell-6"></div>
         <div class="square" id="cell-7"></div>
         <div class="square" id="cell-8"></div>
+    </div>
+    <div id="score">
+        <p id="playerXScore">Victorias de Jugador X: 0</p>
+        <p id="playerOScore">Victorias de Jugador O: 0</p>
     </div>
     <script src="app.js"></script>
 </body>
